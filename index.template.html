@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self'; form-action 'none'; base-uri 'none'">
+<title>观象 · 紫微斗数与八字排盘</title>
+<meta name="description" content="一键试排紫微十二宫与八字四柱。出生资料只在浏览器计算。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="观象 · 紫微斗数 × 八字">
+<meta property="og:description" content="两个传统排盘系统，一份出生资料。打开即试，浏览器本地计算。">
+<meta property="og:url" content="https://tyler-cooking.github.io/guanxiang/">
+<meta property="og:image" content="https://tyler-cooking.github.io/guanxiang/share.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image:alt" content="观象。紫微斗数与八字，浏览器本地排盘。">
+<style>/* STYLE */</style>
+</head>
+<body>
+<main>
+<header>
+  <a class="wordmark" href="#top" id="top">观象 <span>GUANXIANG</span></a>
+  <a class="source" href="https://github.com/Tyler-Cooking/guanxiang">GitHub ↗</a>
+</header>
+<section class="hero">
+  <div class="intro">
+    <p class="kicker">紫微斗数 · 八字</p>
+    <h1>一份出生资料<br>两张传统命盘</h1>
+    <p class="lede">给全球华语读者的排盘工具。先用虚构示例，看十二宫和四柱怎样随时间变化。</p>
+  </div>
+  <form id="birth" autocomplete="off">
+    <div class="fields">
+      <label>公历生日<input type="date" name="date" min="1900-01-02" max="2100-12-30" required></label>
+      <label>出生地钟表时间<input type="time" name="time" required></label>
+      <label>传统顺逆参数<select name="gender"><option value="male">男</option><option value="female">女</option></select></label>
+      <label>查询流年<input type="number" name="year" min="1900" max="2100" required></label>
+    </div>
+    <details>
+      <summary>时区、真太阳时与换日</summary>
+      <div class="fields">
+        <label>出生时 UTC 时差<input name="timezone" type="number" min="-12" max="14" step="0.25" value="8" required></label>
+        <label>出生地经度（东经为正）<input name="longitude" type="number" min="-180" max="180" step="any" value="120" required></label>
+        <label>八字日柱换日<select name="sect"><option value="2">00:00 换日</option><option value="1">23:00 换日</option></select></label>
+        <label class="check"><input name="trueSolar" type="checkbox"> 使用近似真太阳时</label>
+      </div>
+      <p class="muted">时差请填写出生当时的实际值，含当时夏令时。紫微晚子时按 iztro 的次日规则处理。</p>
+    </details>
+    <div class="actions"><button type="submit">开始排盘</button><button id="example" type="button" class="secondary">试排虚构示例</button></div>
+    <p class="muted privacy">出生资料只在当前页面计算。无需登录，页面不保存出生资料。</p>
+    <p id="status" role="status"></p>
+  </form>
+</section>
+<section id="result" hidden aria-labelledby="result-heading">
+  <div class="section-head"><h2 id="result-heading" tabindex="-1">排盘结果</h2><p id="result-mode"></p></div>
+  <div id="charts"></div>
+</section>
+<details class="guide" id="method">
+  <summary>怎么看这两张盘？</summary>
+  <p>紫微先看命宫和身宫，再看每宫的主星与生年四化。八字先看四柱，日柱的天干就是日主。想看时辰的影响，可以改一次出生时间再比较。</p>
+  <p>紫微采用 iztro 默认规则，以输入的民用日期或校正后时钟排盘。八字以立春换年、十二节换月，年柱、月柱和起运按出生瞬间与节气比较。近似真太阳时用于紫微及八字日、时柱。五行仅统计四柱八个表层字。</p>
+  <p>在不同地区排盘时，请使用出生地当时的钟表时间与 UTC 时差。传统命理供文化体验。<a href="https://github.com/Tyler-Cooking/guanxiang#来源与口径">来源与口径 ↗</a></p>
+</details>
+<footer><span>观象 · Guanxiang</span><button type="button" class="link-button" id="share">复制体验链接</button></footer>
+<p id="share-status" class="muted" role="status"></p>
+</main>
+<script>/* SCRIPT */</script>
+</body>
+</html>
